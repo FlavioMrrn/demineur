@@ -4,17 +4,15 @@
 #include <stdbool.h>
 
 typedef struct square_t{
-    enum {EMPTY, BOMB, FLAG} states ;
+    enum {CLOSED, BOMB, FLAG, OPEN} states ;
 }square_t;
 
 typedef struct demineur
 { 
-    bool t_activated[10][10];
-    square_t t_state[10][10];
-    int t_number[10][10];
-
     int area_colons;
     int area_lines;
+    square_t **t_state;
+    int **t_number;
     int bombs_number;
 }dem;
 
@@ -25,7 +23,7 @@ void update();
 void gameEnd();
 void initialization();
 void placeRandomBombs(dem *d, int bombsNumber);
-void calculBombsNumberNear();
+void calculBombsNumberNear(dem *d);
 void openCase();
 void verifyIndex();
 void printTable(dem *d);
